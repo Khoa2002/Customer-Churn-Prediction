@@ -1,6 +1,10 @@
 # Customer Churn Prediction
 ### Customer Churn Prediction
 
+### Xem App [ở đây](customers-churn-prediction-app.streamlit.app) hay customers-churn-prediction-app.streamlit.app
+
+### Xem chi tiết [ở đây](https://buisikhoa.notion.site/Customer-Churn-Prediction-Application-Deploy-1a798d2d62678020acf7c1cc7d5b24cf)
+
 ##  Chi tiết Source Code
 <table style="width:100%">
 <tr>
@@ -65,4 +69,4 @@
 </tr>
 </table>
 
-### See detailed description of the problem [here](https://www.notion.so/buisikhoa/Customer-Segmentation-with-RFM-using-Cluster-Analysis-f5cabc1e11d84ab7abb28a45d84f5aa7)
+
