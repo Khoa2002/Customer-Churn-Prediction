@@ -125,8 +125,33 @@ user_input_encoded = user_input_encoded.reindex(columns=feature_names, fill_valu
 
 # Dự đoán kết quả
 if st.button("Dự đoán"):
-    prediction = model.predict(user_input_encoded)
-    if prediction[0] == 1:
-        st.error(f"👉 Kết quả dự đoán: **Khách hàng sẽ rời bỏ**") 
+    # 1. Dự đoán label
+    pred_label = model.predict(user_input_encoded)[0]
+    
+    # 2. Lấy xác suất churn (giả sử class 1 = churn)
+    if hasattr(model, "predict_proba"):
+        proba = model.predict_proba(user_input_encoded)[0][1]
     else:
-        st.success(f"👉 Kết quả dự đoán: **Khách hàng sẽ ở lại**")
+        # Nếu model không hỗ trợ predict_proba, bạn có thể dùng decision_function()
+        proba = None
+
+    # 3. Hiển thị kết quả
+    if pred_label == 1:
+        st.error("👉 Kết quả dự đoán: **Khách hàng có khả năng rời bỏ**")
+    else:
+        st.success("👉 Kết quả dự đoán: **Khách hàng có khả năng ở lại**")
+
+    # 4. Hiển thị xác suất
+    if proba is not None:
+        pct = round(proba * 100, 2)
+        st.write(f"**Xác suất churn:** {pct}%")
+
+        # 5. Lời khuyên dựa trên mức độ rủi ro
+        if pct > 75:
+            st.warning("⚠️ Rủi ro rất cao! Cân nhắc ngay chương trình khuyến mãi hoặc ưu đãi riêng.")
+        elif pct > 50:
+            st.info("ℹ️ Rủi ro trung bình. Bạn có thể liên hệ chăm sóc khách hàng để giữ chân.")
+        else:
+            st.success("✅ Rủi ro thấp. Khách hàng có xu hướng trung thành.")
+    else:
+        st.write("Không thể tính xác suất cho mô hình này.")
