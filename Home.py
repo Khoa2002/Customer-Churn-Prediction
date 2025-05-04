@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
+import os
 
 st.set_page_config(
     page_title="Home",
@@ -13,7 +14,12 @@ data_raw = pd.read_csv("Dataset/Data_Raw.csv")
 
 # Title
 st.title("[VIE] Dự án khám phá và dự báo khách hàng rời bỏ")
-img = Image.open("D:\\DA\\Tự học\\Customer Churn Prediction\\public\\img\\Overview.png")
+# tại đầu file Home.py
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # thư mục chứa Home.py
+ROOT     = os.path.abspath(os.path.join(BASE_DIR, "."))  # project root (nếu Home.py ở gốc, thì ROOT=BASE_DIR)
+
+img_path = os.path.join(ROOT, "public", "img", "Overview.png")
+img = Image.open(img_path)
 new_width = 800
 new_height = 400
 img = img.resize((new_width, new_height))
@@ -54,11 +60,6 @@ st.write(
 
 ### Domain Knowledge
 st.markdown("<h1 style='font-size:25px;'><b>💡 IV. Kiến thức nền tảng</b></h1>", unsafe_allow_html=True)
-img = Image.open("D:\\DA\\Tự học\\Customer Churn Prediction\\public\\img\\Logo.png")
-new_width = 800
-new_height = 400
-img = img.resize((new_width, new_height))
-st.image(img)    
 st.markdown("<h2 style='font-size:20px;'><b>❓ 1. Customer Churn</b></h2>", unsafe_allow_html=True)
 st.write(
     """

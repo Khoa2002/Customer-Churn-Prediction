@@ -14,7 +14,6 @@ st.set_page_config(
 st.title("Ứng dụng dự báo khách hàng rời bỏ của Telco")
 st.markdown("<h2 style='text-align: center; font-size:20px;'><b>Nhập thông tin khách hàng để dự đoán họ có rời bỏ dịch vụ hay không</b></h2><br>", unsafe_allow_html=True)
 
-
 # Load mô hình, scaler và danh sách cột đã lưu
 # Xác định thư mục gốc của project
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))      # …/pages
