@@ -9,7 +9,7 @@
 <table style="width:100%">
 <tr>
     <th> <p align="center">
-       eda.ipynb
+       Data_Analysis.ipynb
     </p> </th>
     <th> <p align="center">
        Code clean, khám phá phân tích
@@ -17,7 +17,7 @@
 </tr>
 <tr>
     <th> <p align="center">
-       model.ipynb
+       Data_Machine_Learning.ipynb
     </p> </th>
     <th> <p align="center">
        feature engineering data, train model và chọn model phù hợp
@@ -33,10 +33,26 @@
 </tr>
 <tr>
     <th> <p align="center">
+       Exploratory_Data_Analysis.py
+    </p> </th>
+    <th> <p align="center">
+       Trang khám phá dữ liệu, đi sâu vào vấn đề
+    </p> </th>
+</tr>
+<tr>
+    <th> <p align="center">
+       Data_Function.py
+    </p> </th>
+    <th> <p align="center">
+       Code Function
+    </p> </th>
+</tr>
+<tr>
+    <th> <p align="center">
        Predict_App.py
     </p> </th>
     <th> <p align="center">
-       Predict App
+       Trang Predict App
     </p> </th>
 </tr>
 </table>
@@ -45,7 +61,7 @@
 <table style="width:100%">
 <tr>
     <th> <p align="center">
-       raw_data.csv
+       Data_Raw.csv
     </p> </th>
     <th> <p align="center">
        Data ban đầu, lấy từ web
@@ -53,7 +69,7 @@
 </tr>
 <tr>
     <th> <p align="center">
-       eda.csv
+       Data_Analysis.csv
     </p> </th>
     <th> <p align="center">
        Data sau khi clean (Chưa feature engineering)
@@ -61,7 +77,7 @@
 </tr>
 <tr>
     <th> <p align="center">
-       feature_engineering.csv
+       Data_Feature_Engineering.csv
     </p> </th>
     <th> <p align="center">
        Data feature engineering
