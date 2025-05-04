@@ -6,7 +6,7 @@ import pandas as pd
 # Cấu hình tiêu đề tab và icon
 st.set_page_config(
     page_title="App Dự đoán Churn - Telco",
-    page_icon="D:\\DA\\Tự học\\Customer Churn Prediction\\public\\img\\logo_churn.png",
+    page_icon="D:\\DA\\Tự học\\Customer Churn Prediction\\public\\img\\Logo.png",
     layout="centered"
 )
 
@@ -15,8 +15,8 @@ st.markdown("<h2 style='text-align: center; font-size:20px;'><b>Nhập thông ti
 
 
 # Load mô hình, scaler và danh sách cột đã lưu
-model = joblib.load("churn_model.pkl")
-feature_names = joblib.load("feature_names.pkl")  # Danh sách cột sau one-hot encoding lúc train
+model = joblib.load("Model\Churn_Model.pkl")
+feature_names = joblib.load("Model\Feature_Names.pkl")  # Danh sách cột sau one-hot encoding lúc train
 
 # ——— Định nghĩa callbacks để đẩy giá trị vào session_state ———
 def on_internet_change():
@@ -85,11 +85,11 @@ with col3:
 
 st.markdown("<h3 style='text-align: center; font-size:17px;'><b>Thông tin thanh toán</b></h3>", unsafe_allow_html=True)
 Contract = st.selectbox("Loại hợp đồng", ["Month-to-month", "One year", "Two year"])
-tenure = st.slider("Tenure (months)", min_value=1, max_value=72, value=1)
+tenure = st.slider("Tenure (months)", min_value=1, max_value=72, value=0)
 PaperlessBilling = st.selectbox("Hóa đơn điện tử", ["No", "Yes"])
 PaymentMethod = st.selectbox("Phương thức thanh toán", ["Electronic check", "Mailed check", "Bank transfer", "Credit card"])
-MonthlyCharges = st.number_input("Cước phí hàng tháng", min_value=0.0, step=0.1)
-TotalCharges = st.number_input("Cước phí hàng năm", min_value=0.0, step=0.1)
+MonthlyCharges = st.number_input("Cước phí hàng tháng", min_value=0.0, step=10.0)
+TotalCharges = st.number_input("Cước phí hàng năm", min_value=0.0, step=10.0)
 
 
 # Tạo DataFrame từ dữ liệu nhập
@@ -125,33 +125,45 @@ user_input_encoded = user_input_encoded.reindex(columns=feature_names, fill_valu
 
 # Dự đoán kết quả
 if st.button("Dự đoán"):
-    # 1. Dự đoán label
-    pred_label = model.predict(user_input_encoded)[0]
+    missing = []
+    if tenure is None or tenure <= 0:
+        missing.append("Tenure")
+    if MonthlyCharges is None or MonthlyCharges <= 0:
+        missing.append("MonthlyCharges")
+    if TotalCharges is None or TotalCharges <= 0:
+        missing.append("TotalCharges")
+    if missing:
+        st.warning(f"👉 **Vui lòng nhập chỉ số cho: {', '.join(missing)}**")
+    else:
+        # 1. Dự đoán label
+        pred_label = model.predict(user_input_encoded)[0]
     
-    # 2. Lấy xác suất churn (giả sử class 1 = churn)
-    if hasattr(model, "predict_proba"):
-        proba = model.predict_proba(user_input_encoded)[0][1]
-    else:
-        # Nếu model không hỗ trợ predict_proba, bạn có thể dùng decision_function()
-        proba = None
-
-    # 3. Hiển thị kết quả
-    if pred_label == 1:
-        st.error("👉 Kết quả dự đoán: **Khách hàng có khả năng rời bỏ**")
-    else:
-        st.success("👉 Kết quả dự đoán: **Khách hàng có khả năng ở lại**")
-
-    # 4. Hiển thị xác suất
-    if proba is not None:
-        pct = round(proba * 100, 2)
-        st.write(f"**Xác suất churn:** {pct}%")
-
-        # 5. Lời khuyên dựa trên mức độ rủi ro
-        if pct > 75:
-            st.warning("⚠️ Rủi ro rất cao! Cân nhắc ngay chương trình khuyến mãi hoặc ưu đãi riêng.")
-        elif pct > 50:
-            st.info("ℹ️ Rủi ro trung bình. Bạn có thể liên hệ chăm sóc khách hàng để giữ chân.")
+        # 2. Lấy xác suất churn (giả sử class 1 = churn)
+        if hasattr(model, "predict_proba"):
+            proba = model.predict_proba(user_input_encoded)[0][1]
         else:
-            st.success("✅ Rủi ro thấp. Khách hàng có xu hướng trung thành.")
-    else:
-        st.write("Không thể tính xác suất cho mô hình này.")
+            # Nếu model không hỗ trợ predict_proba, bạn có thể dùng decision_function()
+            proba = None
+
+        # 3. Hiển thị kết quả
+        if pred_label == 1:
+            st.error("👉 Kết quả dự đoán: **Khách hàng có khả năng rời bỏ**")
+        else:
+            st.success("👉 Kết quả dự đoán: **Khách hàng có khả năng ở lại**")
+
+        # 4. Hiển thị xác suất
+        if proba is not None:
+            pct = round(proba * 100, 2)
+            st.write(f"**Xác suất churn:** {pct}%")
+
+            # 5. Lời khuyên dựa trên mức độ rủi ro
+            if pct > 75:
+                st.warning("⚠️ Rủi ro rất cao! Cân nhắc ngay chương trình khuyến mãi hoặc ưu đãi riêng.")
+            elif pct > 50:
+                st.info("ℹ️ Rủi ro trung bình. Bạn có thể liên hệ chăm sóc khách hàng để giữ chân.")
+            else:
+                st.success("✅ Rủi ro thấp. Khách hàng có xu hướng trung thành.")
+        else:
+            st.write("Không thể tính xác suất cho mô hình này.")
+
+
