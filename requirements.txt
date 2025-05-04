@@ -5,3 +5,5 @@ scikit-learn==1.5.2
 joblib==1.4.2
 xgboost
 matplotlib
+seaborn
+plotly
