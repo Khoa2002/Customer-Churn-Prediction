@@ -1,5 +1,6 @@
 import streamlit as st
 import joblib
+import os
 import numpy as np
 import pandas as pd
 
@@ -15,8 +16,17 @@ st.markdown("<h2 style='text-align: center; font-size:20px;'><b>Nhập thông ti
 
 
 # Load mô hình, scaler và danh sách cột đã lưu
-model = joblib.load("Model\Churn_Model.pkl")
-feature_names = joblib.load("Model\Feature_Names.pkl")  # Danh sách cột sau one-hot encoding lúc train
+# Xác định thư mục gốc của project
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))      # …/pages
+PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))  # project root
+
+# Build đường dẫn tuyệt đối đến model và feature_names
+model_path = os.path.join(PROJECT_ROOT, "Model", "Churn_Model.pkl")
+feature_names_path = os.path.join(PROJECT_ROOT, "Model", "Feature_Names.pkl")
+
+# Load chúng
+model = joblib.load(model_path)
+feature_names = joblib.load(feature_names_path)
 
 # ——— Định nghĩa callbacks để đẩy giá trị vào session_state ———
 def on_internet_change():
