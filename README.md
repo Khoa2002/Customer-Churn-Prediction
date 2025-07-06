@@ -1,14 +1,14 @@
 # Customer Churn Prediction
 ### Customer Churn Prediction
 <h1 align="center"> Welcome to Customer Churn Prediction App 👋</h1>
-<h5 align="center"> Xem App <a href="customers-churn-prediction-app.streamlit.app"> ở đây </a></h5>
+<h5 align="center"> Xem App: <a href="customers-churn-prediction-app.streamlit.app">customers-churn-prediction-app.streamlit.app</a></h5>
 
-### Xem App [ở đây](customers-churn-prediction-app.streamlit.app) hay customers-churn-prediction-app.streamlit.app
+<h5 align="center"> Xem chi tiết: <a href="https://buisikhoa.notion.site/Customer-Churn-Prediction-Application-Deploy-1a798d2d62678020acf7c1cc7d5b24cf">ở đây</a></h5>
 
 ### Project Customer Churn Prediction
 Dữ liệu thăm dò và triển khai ứng dụng dự đoán tình trạng mất khách hàng và ưu tiên những khách hàng thực sự muốn rời đi
 
-### Xem chi tiết [ở đây](https://buisikhoa.notion.site/Customer-Churn-Prediction-Application-Deploy-1a798d2d62678020acf7c1cc7d5b24cf)
+
 
 ###  Chi tiết Source Code
 <table style="width:100%">
