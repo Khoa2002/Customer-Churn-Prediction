@@ -1,7 +1,7 @@
 # Customer Churn Prediction
 ### Customer Churn Prediction
 <h1 align="center"> Welcome to Customer Churn Prediction App 👋</h1>
-<h5 align="center"> Xem App [ở đây](customers-churn-prediction-app.streamlit.app) hay customers-churn-prediction-app.streamlit.app </h5>
+<h5 align="center"> Xem App <a href="customers-churn-prediction-app.streamlit.app"> ở đây </a></h5>
 
 ### Xem App [ở đây](customers-churn-prediction-app.streamlit.app) hay customers-churn-prediction-app.streamlit.app
 
